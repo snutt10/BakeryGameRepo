@@ -1,2 +1,2 @@
 # BakeryGameRepo
-A baker game
+A bakery game
