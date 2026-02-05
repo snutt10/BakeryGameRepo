@@ -1,0 +1,15 @@
+{
+  "name": "Bakery Webpage",
+  "version": "1.0.0",
+  "description": "A simple webpage for a bakery using Express.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Sarah Nutt and Liss Apontes Rivera",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1"
+  }
+}
