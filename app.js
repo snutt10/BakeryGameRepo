@@ -13,6 +13,13 @@ app.get("/", (req, res) => {
     res.render("index", { name: "Bakery Game" });
 });
 
+app.get("/startGame", (req, res) => {
+    res.render("startGame");
+});
+
+app.get("/exitGame", (req, res) => {
+    res.render("exit");
+});
 
 app.listen(port, () => {
     console.log(`Express is now listening on port ${port}`);
