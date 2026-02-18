@@ -1,5 +1,5 @@
 {
-  "name": "Bakery Webpage",
+  "name": "bakery-webpage",
   "version": "1.0.0",
   "description": "A simple webpage for a bakery using Express.js",
   "main": "app.js",
