@@ -6,11 +6,39 @@
     </head>
     <body>
         <%- include('header.ejs')%>
-        <h1>Baking Process</h1>
+    <h1>Baking Process for <%= recipe %></h1>
+    <img id="bakingGif" src="<%= bakingGif %>" alt="Baking Process GIF">
+    <button type="button" onclick="nextStep()">Next Step</button>
+    <script>
+        const gifs = [
+            '/images/cookingCookies.gif',
+            '/images/muffins.gif',
+            '/images/applePie.gif'
+        ];
+        let currentStep = 0;
 
-        <section>
-
-        </section>
-
-        <%- include('footer.ejs')%>
+        function nextStep() {
+            currentStep++;
+            if (currentStep >= 2) {
+                // Go to finished page
+                window.location.href = "/finishedResult?recipe=<%= recipe %>";
+            }
+            const recipe = "<%= recipe %>";
+            switch (recipe) {
+                case 'Chocolate Chip Cookies':
+                    document.getElementById("bakingGif").src = gifs[0];
+                    break;
+                case 'Blueberry Muffins':
+                    document.getElementById("bakingGif").src = gifs[1];
+                    break;
+                case 'Apple Pie':
+                    document.getElementById("bakingGif").src = gifs[2];
+                    break;
+                default:
+                    currentStep = 0;
+            }
+        }
+    </script>
+    <%- include('footer.ejs')%>
     </body>
+</html>
