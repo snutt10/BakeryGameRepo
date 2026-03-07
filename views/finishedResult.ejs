@@ -6,10 +6,10 @@
     </head>
     <body>
         <%- include('header.ejs')%>
-        <h1>Finished Result</h1>
+        <h1>Finished Result for: <%= recipe %></h1>
 
         <section>
-
+            <img id="finishedResultImg" src="<%= finishedCooking %>" alt="Finished Result Image">
         </section>
 
         <%- include('footer.ejs')%>

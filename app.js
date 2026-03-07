@@ -55,6 +55,22 @@ app.post("/bakingProcess", (req, res) => {
 app.get("/finishedResult", (req, res) => {
     const recipe = req.query.recipe || "No recipe selected";
     res.render("finishedResult", { recipe: recipe });
+    switch (recipe) {
+        case 'Chocolate Chip Cookies':
+            console.log(`Finished recipe: ${recipe}`);
+            res.render("finishedResult", { recipe: recipe, finishedCooking: '/images/bakedCookies.jpg' });
+            break;
+        case 'Blueberry Muffins':
+            console.log(`Finished recipe: ${recipe}`);
+            res.render("finishedResult", { recipe: recipe, finishedCooking: '/images/bakedMuffins.jpg' });
+            break;
+        case 'Apple Pie':
+            console.log(`Finished recipe: ${recipe}`);
+            res.render("finishedResult", { recipe: recipe, finishedCooking: '/images/bakedApplePie.jpg' });
+            break;
+        default:
+            console.log(`Unknown finished recipe: ${recipe}`);
+    }
 });
 
 app.listen(port, () => {
