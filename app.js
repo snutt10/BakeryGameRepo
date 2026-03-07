@@ -21,6 +21,19 @@ app.get("/exitGame", (req, res) => {
     res.render("exit");
 });
 
+app.get("/getIngrediants", (req, res) => {
+    const ingredients = [
+        { id: 1, name: "Flour" },
+        { id: 2, name: "Sugar" },
+        { id: 3, name: "Eggs" },
+        { id: 4, name: "Butter" },
+        { id: 5, name: "Chocolate Chips" },
+        { id: 6, name: "Blueberries" },
+        { id: 7, name: "Apples" },
+    ];
+    res.render("getIngrediants", { ingredients: ingredients });
+});
+
 app.get("/bakingProcess", (req, res) => {
     const recipe = req.query.recipe || "No recipe selected";
     const gif = req.query.gif || "/images/mixing.gif";

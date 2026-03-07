@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html>
+    <style>
+        #draggable-ingredients {
+            position: absolute;
+            z-index: 9;
+            background-color: aliceblue;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
     <head>
         <title>Get Ingredients</title>
         <link rel="stylesheet" href="/css/site.css">
@@ -8,9 +17,18 @@
         <%- include('header.ejs')%>
         <h1>Get Ingredients</h1>
 
+        <h2>Available Ingredients</h2>
+                <ul>
+                    <% ingredients.forEach(function(ingredient) { %>
+                        <li class="draggable" draggable="true" data-id="<%= ingredient.id %>"><%= ingredient.name %></li>
+                    <% }); %>
+                </ul>
         <section>
-
+            <div id="draggable-ingredients">
+                <p>Drag</p>
+            </div>
         </section>
 
+        <script src="../js/script.js"></script>
         <%- include('footer.ejs')%>
     </body>
