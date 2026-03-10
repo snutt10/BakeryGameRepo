@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <style>
-        #draggable-ingredients {
+        #draggable-ingredient1, #draggable-ingredient2, #draggable-ingredient3 {
             position: absolute;
             z-index: 9;
             background-color: aliceblue;
@@ -10,7 +10,7 @@
         }
     </style>
     <head>
-        <title>Get Ingredients</title>
+        <title>Add the necessary ingredients for: <%= recipe.name %> to the mixing bowl</title>
         <link rel="stylesheet" href="/css/site.css">
     </head>
     <body>
@@ -18,17 +18,26 @@
         <h1>Get Ingredients</h1>
 
         <h2>Available Ingredients</h2>
-                <ul>
-                    <% ingredients.forEach(function(ingredient) { %>
-                        <li class="draggable" draggable="true" data-id="<%= ingredient.id %>"><%= ingredient.name %></li>
-                    <% }); %>
-                </ul>
+                
         <section>
-            <div id="draggable-ingredients">
-                <p>Drag</p>
+            <div class="dropzone" id="mixingBowl" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <img id="mixingBowl" src="/images/mixing.gif" alt="Mixing Bowl Image" draggable="true" ondragover="allowDrop(event)" ondrop="drop(event)">
+            </div>
+
+            <div id="draggable-ingredient1">
+                <p class="draggable" draggable="true" data-id="<%= ingredients[0].id %>"><%= ingredients[0].name %></p>
+            </div>
+
+            <div id="draggable-ingredient2">
+                <p class="draggable" draggable="true" data-id="<%= ingredients[1].id %>"><%= ingredients[1].name %></p>
+            </div>
+
+            <div id="draggable-ingredient3">
+                <p class="draggable" draggable="true" data-id="<%= ingredients[2].id %>"><%= ingredients[2].name %></p>
             </div>
         </section>
 
         <script src="../js/script.js"></script>
         <%- include('footer.ejs')%>
     </body>
+</html>

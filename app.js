@@ -9,6 +9,16 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const ingredients = [
+        { id: 1, name: "Flour" },
+        { id: 2, name: "Sugar" },
+        { id: 3, name: "Eggs" },
+        { id: 4, name: "Butter" },
+        { id: 5, name: "Chocolate Chips" },
+        { id: 6, name: "Blueberries" },
+        { id: 7, name: "Apples" },
+    ];
+
 app.get("/", (req, res) => {
     res.render("index", { name: "Bakery Game" });
 });
@@ -22,15 +32,29 @@ app.get("/exitGame", (req, res) => {
 });
 
 app.get("/getIngrediants", (req, res) => {
-    const ingredients = [
-        { id: 1, name: "Flour" },
-        { id: 2, name: "Sugar" },
-        { id: 3, name: "Eggs" },
-        { id: 4, name: "Butter" },
-        { id: 5, name: "Chocolate Chips" },
-        { id: 6, name: "Blueberries" },
-        { id: 7, name: "Apples" },
-    ];
+    const recipe = req.query.recipe || "No recipe selected";
+    res.render("getIngrediants", { recipe: recipe, ingredients: ingredients });
+});
+
+app.post("/getIngrediants", (req, res) => {
+    const recipe = req.query.recipe || "No recipe selected";
+
+    switch (recipe) {
+        case 'Chocolate Chip Cookies':
+            console.log(`Finished recipe: ${recipe}`);
+            res.render("finishedResult", { recipe: recipe, ingredients: ingredients });
+            break;
+        case 'Blueberry Muffins':
+            console.log(`Finished recipe: ${recipe}`);
+            res.render("finishedResult", { recipe: recipe, ingredients: ingredients });
+            break;
+        case 'Apple Pie':
+            console.log(`Finished recipe: ${recipe}`);
+            res.render("finishedResult", { recipe: recipe, ingredients: ingredients });
+            break;
+        default:
+            console.log(`Unknown finished recipe: ${recipe}`);
+    }
     res.render("getIngrediants", { ingredients: ingredients });
 });
 
