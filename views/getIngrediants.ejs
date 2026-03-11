@@ -10,7 +10,7 @@
         }
     </style>
     <head>
-        <title>Add the necessary ingredients for: <%= recipe.name %> to the mixing bowl</title>
+        <title>Add the necessary ingredients for: <%= recipe %> to the mixing bowl</title>
         <link rel="stylesheet" href="/css/site.css">
     </head>
     <body>
@@ -20,8 +20,8 @@
         <h2>Available Ingredients</h2>
                 
         <section>
-            <div class="dropzone" id="mixingBowl" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <img id="mixingBowl" src="/images/mixing.gif" alt="Mixing Bowl Image" draggable="true" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <div class="dropzone" id="mixingBowl" style="position: relative; display: inline-block;">
+                <img src="/images/mixing.gif" alt="Mixing Bowl Image" style="display: block;">
             </div>
 
             <div id="draggable-ingredient1">
@@ -34,6 +34,26 @@
 
             <div id="draggable-ingredient3">
                 <p class="draggable" draggable="true" data-id="<%= ingredients[2].id %>"><%= ingredients[2].name %></p>
+            </div>
+
+            <div id="draggable-ingredient4">
+                <p class="draggable" draggable="true" data-id="<%= ingredients[3].id %>"><%= ingredients[3].name %></p>
+            </div>
+
+            <div id="draggable-ingredient5">
+                <p class="draggable" draggable="true" data-id="<%= ingredients[4].id %>"><%= ingredients[4].name %></p>
+            </div>
+
+            <div id="draggable-ingredient6">
+                <p class="draggable" draggable="true" data-id="<%= ingredients[5].id %>"><%= ingredients[5].name %></p>
+            </div>
+
+            <div id="draggable-ingredient7">
+                <p class="draggable" draggable="true" data-id="<%= ingredients[6].id %>"><%= ingredients[6].name %></p>
+            </div>
+
+            <div id="draggable-ingredient8">
+                <p class="draggable" draggable="true" data-id="<%= ingredients[7].id %>"><%= ingredients[7].name %></p>
             </div>
         </section>
 

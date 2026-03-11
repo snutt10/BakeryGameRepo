@@ -3,31 +3,55 @@
 let dragged;
 let droppedIngredients = new Set();
 
-dragElement(document.getElementById("draggable-ingredient1"));
-dragElement(document.getElementById("draggable-ingredient2"));
-dragElement(document.getElementById("draggable-ingredient3"));
+const draggableElements = document.querySelectorAll('.draggable');
+
+dragElement(draggableElements);
 
 // Set up drag and drop event listeners when page loads
 document.addEventListener('DOMContentLoaded', function() {
     const dropzone = document.querySelector(".dropzone");
     if (dropzone) {
+        console.log("Dropzone found, setting up event listeners");
         dropzone.addEventListener('dragover', allowDrop);
         dropzone.addEventListener('drop', drop);
-        dropzone.addEventListener('dragleave', dragLeave);
     }
+    
+    // Set up drag events for ingredients
+    draggableElements.forEach(element => {
+        element.addEventListener('dragstart', function(e) {
+            dragged = e.target.closest('[id^="draggable-ingredient"]');
+            console.log("Started dragging:", dragged ? dragged.id : "none");
+        });
+        console.log("Drag event added to:", element.textContent);
+    });
 });
 
 function allowDrop(ev) {
     ev.preventDefault();
+    console.log("Allowing drop");
 }
 
 function drop(e) {
     e.preventDefault();
     
-    if (!dragged) return;
+    if (!dragged) {
+        console.log("No dragged element found");
+        return;
+    }
+    
+    console.log("Drop event fired, dragged element:", dragged);
     
     // Get the ingredient ID from the dragged element
-    const ingredientId = dragged.querySelector('.draggable').getAttribute('data-id');
+    const ingredientElement = dragged.querySelector('.draggable');
+    if (!ingredientElement) {
+        console.log("No .draggable element found in dragged item");
+        return;
+    }
+    
+    const ingredientId = ingredientElement.getAttribute('data-id');
+    const ingredientName = ingredientElement.textContent;
+    
+    console.log("Dropping ingredient:", ingredientName, "with ID:", ingredientId);
     
     // Add to the set of dropped ingredients
     droppedIngredients.add(ingredientId);
@@ -36,29 +60,24 @@ function drop(e) {
     dragged.style.opacity = '0.5';
     dragged.style.pointerEvents = 'none';
     
+    console.log("Current dropped ingredients count:", droppedIngredients.size);
+    
     // Check if all 3 ingredients are dropped
     if (droppedIngredients.size === 3) {
+        console.log("All ingredients collected! Redirecting...");
         setTimeout(() => {
-            // Extract recipe name and navigate
-            const recipeMatch = document.title.match(/for: (.*?) to/);
-            const recipeName = recipeMatch ? recipeMatch[1] : "Unknown Recipe";
+            // Extract recipe name from title
+            const titleText = document.title;
+            const recipeMatch = titleText.match(/for: (.*?) to/);
+            const recipeName = recipeMatch ? recipeMatch[1].trim() : "Unknown Recipe";
             
-            // Create form and submit
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/bakingProcess';
+            console.log("Extracted recipe name:", recipeName, "from title:", titleText);
             
-            const recipeInput = document.createElement('input');
-            recipeInput.type = 'hidden';
-            recipeInput.name = 'recipe';
-            recipeInput.value = recipeName;
-            
-            form.appendChild(recipeInput);
-            document.body.appendChild(form);
-            form.submit();
+            window.location.href = '/bakingProcess?recipe=' + encodeURIComponent(recipeName);
         }, 500);
     }
 }
+
 function dragElement(element) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if (document.getElementById(element.id + "header")) {

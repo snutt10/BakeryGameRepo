@@ -17,6 +17,7 @@ const ingredients = [
         { id: 5, name: "Chocolate Chips" },
         { id: 6, name: "Blueberries" },
         { id: 7, name: "Apples" },
+        {}
     ];
 
 app.get("/", (req, res) => {
@@ -52,6 +53,10 @@ app.post("/getIngrediants", (req, res) => {
             console.log(`Finished recipe: ${recipe}`);
             res.render("finishedResult", { recipe: recipe, ingredients: ingredients });
             break;
+        case 'Bread rolls':
+            console.log(`Finished recipe: ${recipe}`);
+            res.render("finishedResult", { recipe: recipe, ingredients: ingredients });
+            break;
         default:
             console.log(`Unknown finished recipe: ${recipe}`);
     }
@@ -72,22 +77,23 @@ app.post("/bakingProcess", (req, res) => {
             console.log(`Starting recipe: ${recipeName}`);
             res.render("bakingProcess", { recipe: recipeName, bakingGif: '/images/cookingCookies.gif' });
             bakingProcess(recipeName, '/images/cookingCookies.gif');
-            // Logic to start Chocolate Chip Cookies recipe
             break;
         case 'Blueberry Muffins':
             res.render("bakingProcess", { recipe: recipeName, bakingGif: '/images/muffins.gif' });
             bakingProcess(recipeName, '/images/muffins.gif');
-            // Logic to start Blueberry Muffins recipe
             break;
         case 'Apple Pie':
             res.render("bakingProcess", { recipe: recipeName, bakingGif: '/images/applePie.gif' });
             bakingProcess(recipeName, '/images/applePie.gif');
-            // Logic to start Apple Pie recipe
+            break;
+        case 'Bread rolls':
+            res.render("bakingProcess", { recipe: recipeName, bakingGif: '/images/breadRollsBaking.gif' });
+            bakingProcess(recipeName, '/images/breadRollsBaking.gif');
             break;
         default:
             res.render("bakingProcess", { recipe: "Unknown recipe" });
     }
-});
+}); 
 
 app.get("/finishedResult", (req, res) => {
     const recipe = req.query.recipe || "No recipe selected";
@@ -104,6 +110,10 @@ app.get("/finishedResult", (req, res) => {
         case 'Apple Pie':
             console.log(`Finished recipe: ${recipe}`);
             res.render("finishedResult", { recipe: recipe, finishedCooking: '/images/bakedApplePie.jpg' });
+            break;
+        case 'Bread rolls':
+            console.log(`Finished recipe: ${recipe}`);
+            res.render("finishedResult", { recipe: recipe, finishedCooking: '/images/bakedBreadRolls.jpg' });
             break;
         default:
             console.log(`Unknown finished recipe: ${recipe}`);
