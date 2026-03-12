@@ -14,7 +14,8 @@
             '/images/cookingCookies.gif',
             '/images/muffins.gif',
             '/images/applePie.gif',
-            '/images/breadRollsBaking.gif'
+            '/images/breadRollsBaking.gif',
+            '/images/breadLoafBaking.gif'
         ];
         let currentStep = 0;
 
@@ -37,6 +38,10 @@
                     break;
                 case 'Bread rolls':
                     document.getElementById("bakingGif").src = gifs[3];
+                    console.log("Current step: " + currentStep);
+                    break;
+                case 'Bread Loaf':
+                    document.getElementById("bakingGif").src = gifs[4];
                     console.log("Current step: " + currentStep);
                     break;
                 default:

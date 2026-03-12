@@ -62,19 +62,42 @@ function drop(e) {
     
     console.log("Current dropped ingredients count:", droppedIngredients.size);
     
+    let recipe = "<%= recipe %>";
+    switch (recipe) {
+        case 'Chocolate Chip Cookies':
+            console.log("Selected recipe: " + recipe);
+            checkAllIngredientsDropped("<%= requiredIngredients.length %>");
+            break;
+        case 'Blueberry Muffins':
+            console.log("Selected recipe: " + recipe);
+            break;
+        case 'Apple Pie':
+            console.log("Selected recipe: " + recipe);
+            break;
+        case 'Bread rolls':
+            console.log("Selected recipe: " + recipe);
+            break;
+        case 'Bread Loaf':
+            console.log("Selected recipe: " + recipe);
+            break;
+        default:
+            console.log("Unknown recipe selected: " + recipe);
+    }
     // Check if all 3 ingredients are dropped
-    if (droppedIngredients.size === 3) {
-        console.log("All ingredients collected! Redirecting...");
-        setTimeout(() => {
-            // Extract recipe name from title
-            const titleText = document.title;
-            const recipeMatch = titleText.match(/for: (.*?) to/);
-            const recipeName = recipeMatch ? recipeMatch[1].trim() : "Unknown Recipe";
-            
-            console.log("Extracted recipe name:", recipeName, "from title:", titleText);
-            
-            window.location.href = '/bakingProcess?recipe=' + encodeURIComponent(recipeName);
-        }, 500);
+    function checkAllIngredientsDropped(requiredIngredients) {
+        if (droppedIngredients.size === requiredIngredients) {
+            console.log("All ingredients collected! Redirecting...");
+            setTimeout(() => {
+                // Extract recipe name from title
+                const titleText = document.title;
+                const recipeMatch = titleText.match(/for: (.*?) to/);
+                const recipeName = recipeMatch ? recipeMatch[1].trim() : "Unknown Recipe";
+                
+                console.log("Extracted recipe name:", recipeName, "from title:", titleText);
+                
+                window.location.href = '/bakingProcess?recipe=' + encodeURIComponent(recipeName);
+            }, 500);
+        }
     }
 }
 
